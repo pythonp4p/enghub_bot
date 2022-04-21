@@ -40,7 +40,7 @@ b5 = KeyboardButton('/Tests')
 b10 = KeyboardButton('/Self_study')
 
 # ^
-kb_client = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+kb_client = ReplyKeyboardMarkup(resize_keyboard=True)
 
 # ?
 # !
