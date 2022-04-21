@@ -1,1 +1,1 @@
-worker: python mom_bot.py
+web: python mom_bot.py
