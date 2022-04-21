@@ -15,3 +15,11 @@ kb_url1 = InlineKeyboardButton(text='3 курс', url='https://www.dropbox.com/s
 kb_url2 = InlineKeyboardButton(text='4 курс', url='https://www.dropbox.com/s/deakpmkxf70ywn9/tasks_part%201.pdf?dl=0')
 
 proginkb.add(kb_url1, kb_url2)
+
+
+selfkb = InlineKeyboardMarkup(row_width=1)
+
+surl = InlineKeyboardButton(text='3 курс', url='https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar')
+surl1 = InlineKeyboardButton(text='4 курс', url='https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar')
+
+selfkb.add(surl, surl1)
