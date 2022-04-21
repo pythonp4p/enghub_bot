@@ -1,7 +1,11 @@
 import os
+from venv import psycopg2 as ps
 from aiogram.utils import executor
 from create_bot import dp, bot, URL_APP
-#from data_base import sqlite_db, sqlite_db_2, sqlite_db_3
+from base import base_1, base_2, base_3
+
+base = ps.connect(os.environ.get('DATABASE_URL'), sslmode='require')
+cur = base.cursor()
 
 # Запускаем функцию старта базы данных
 async def on_startup(dp):
@@ -9,6 +13,11 @@ async def on_startup(dp):
 
 async def on_shutdown(dp):
     await bot.delete_webhook()
+    cur.close()
+    base_1.close()
+
+
+
 
 # Импортируем функции из наших файлов
 from handlers import client, other

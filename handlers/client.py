@@ -1,10 +1,10 @@
 from aiogram import types, Dispatcher
 from create_bot import dp, bot
 from keyboards import kb_client
-from keyboards.client_inline_kb import urlkb, proginkb, selfkb
+from keyboards.client_inline_kb import urlkb, proginkb
 from aiogram.types import ReplyKeyboardRemove
 import time
-#from data_base import sqlite_db, sqlite_db_2, sqlite_db_3
+from base import base_1, base_2, base_3
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.dispatcher.filters import Text
 
@@ -46,19 +46,29 @@ async def max_tests_command(message: types.Message):
 
 @dp.message_handler(commands=['Self_study'])
 async def self_study_command(message: types.Message):
-    await bot.send_message(message.from_user.id, 'Матеріали для самостійного проходження', reply_markup=selfkb)
+    await base_3.sql_read(message)
 
 
 async def call_me_command(message: types.Message):
     await bot.send_message(message.from_user.id,'Мій телеграм аккаунт:\n https://t.me/Tania_Pasechnik')
 
 inkb = InlineKeyboardMarkup(row_width=1)
-inkb.add(InlineKeyboardButton(text='3 курс', url='https://docs.google.com/forms/d/1OuGrAnPUGP3li7gNwzVj8pJWCvj0c3Gzd84JDgXRigk/edit?usp=sharing')).add(InlineKeyboardButton(text='4 курс', url='https://docs.google.com/forms/d/1Vn7sZzyAmOdyLerVNOxDAdRSeGoO4Q4Y38FCgrI8M1M/edit?usp=sharing'))
+inkb.add(InlineKeyboardButton(text='3 курс', callback_data='but_3 курс')).add(InlineKeyboardButton(text='4 курс', callback_data='but_4 курс'))
 
 
 #@dp.message_handler(commands=['Tests'])
 async def pizza_menu_command(message: types.Message):
     await message.answer("Оберіть свій курс", reply_markup=inkb)
+    #await sqlite_db.sql_read(message)
+
+#@dp.callback_query_handler(Text(startswith='but_'))
+async def buttonrrr_call(callback: types.CallbackQuery):
+    if callback.data == 'but_3 курс':
+        await base_1.sql_read(callback)
+        await callback.answer("Ви обрали: " + callback.data[4:])
+    if callback.data == 'but_4 курс':
+        await base_2.sql_read(callback)
+        await callback.answer("Ви обрали: " + callback.data[4:])
 
 
 # & Тут нам в функции нужно записать команды для регистрации handlerов для нашего бота и передать уже
@@ -72,3 +82,4 @@ def register_handlers_client(dp: Dispatcher):
     #dp.register_callback_query_handler(buttonrrr_call)
     dp.register_message_handler(max_tests_command, commands=['Syllabus'])
     dp.register_message_handler(pizza_menu_command, commands=['Tests'])
+    dp.register_callback_query_handler(buttonrrr_call)
