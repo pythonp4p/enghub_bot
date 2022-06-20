@@ -44,3 +44,4 @@ typing_extensions==4.2.0
 urllib3==1.26.9
 yapf==0.32.0
 yarl==1.7.2
+psycopg2==
