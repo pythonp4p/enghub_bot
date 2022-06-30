@@ -8,17 +8,6 @@ import time
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.dispatcher.filters import Text
 
-
-# !                                      КЛИЕНТСКАЯ ЧАСТЬ                                                       #
-# При помощи диспечера записываем декоратор. Сюда будет попадать вот такой декоратор.
-# Он обозначает событие, когда в наш чат кто то что то пишет вообще
-# * В commands= перечисляем команды на которые будет реагировать наш бот при помощи этого handlerа
-# * Тоесть этот handler сработает тогда, когда пользователь напишет /start или /help
-# * И также этот же самый handler сработает тогда, когда пользователь добавиться к нашему боту
-# ? В телеграмме бот не может написать пользователю первый, тоесть если пользователь не написал боту
-# ? или не зашел в группу. А наш код далее будет писать ему в личку, поэтому прописываем обработчик ошибок
-# ^ Записываем код, который сработает во время команды /start и /help
-# ^ В данном случае, мы будем отправлять пользователю сообщение в личку
 #@dp.message_handler(commands=['start', 'help'])
 async def commands_start(message: types.Message):
     try:
@@ -61,11 +50,7 @@ inkb.add(InlineKeyboardButton(text='3 курс', url='https://docs.google.com/fo
 async def pizza_menu_command(message: types.Message):
     await message.answer("Оберіть свій курс", reply_markup=inkb)
 
-
-
-# & Тут нам в функции нужно записать команды для регистрации handlerов для нашего бота и передать уже
-# & при помощи этой функции все эти handlerы в основной файл
-# & Сюда в эту функцию необходимо передать диспечер и написать для него аннотацию типа
+    
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(commands_start, commands=['start', 'help'])
     dp.register_message_handler(pizza_place_command,
