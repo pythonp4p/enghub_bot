@@ -1,6 +1,6 @@
-from email import message
+
 import os
-from venv import psycopg2
+
 from aiogram.utils import executor
 from create_bot import dp, bot, URL_APP
 
