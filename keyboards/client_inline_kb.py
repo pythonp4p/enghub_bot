@@ -1,6 +1,6 @@
-#from aiogram import types
+
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-#from aiogram.dispatcher.filters import Text
+
 
 urlkb = InlineKeyboardMarkup(row_width=1)
 
